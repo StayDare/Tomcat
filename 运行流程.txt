@@ -1,0 +1,50 @@
+1.浏览器输入访问路径
+http:localhost:8080//index?method=test1
+2.socket接收浏览器传过来的请求，并解析
+GET /index?method=test1 HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Cookie: Idea-8296eb31=b391cb43-cb3f-4e92-ad47-625beeeecea2
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Pragma: no-cache
+Cache-Control: no-cache
+
+解析第一行
+path=/index
+method=test01
+
+3.将解析到的数据封装到MyRequest对象
+    //设置请求参数
+    request.setParameter(requestParams);
+    //设置请求路径
+    request.setPath(pathAndParams[0]);
+
+4.根据request获取HttpServlet
+    ServletContainer.getHttpServlet(path);
+    ServletContainer存放了Web.xml配置文件的信息
+
+    path ---> ServletMappingMaps  (path,ServletMapping(name,url))
+    拿到ServletMapping里的name
+    name ---> Servlet (name,Servlet(name,clazz))
+    拿到Servlet里的clazz
+    反射获取MyHttpServlet对象  Servlet_1
+
+5.调用MyHttpServlet对象的service(request,response)方法
+    service方法处理请求与响应
+    MyHttpServlet对象(Servlet_1)没有service，但是父类BaseServlet有
+
+    通过request获取请求参数 method=test1
+    请求参数的值对应了Servlet_1中的方法名
+    反射获取方法对象，再执行方法  返回了HTML页面的字符串名称 test1.html
+
+    response对象调用forward(String dest)
+    根据页面名称，将整个页面加载到流中
+    读取整个流并且把它写到socket里，自动响应到浏览器

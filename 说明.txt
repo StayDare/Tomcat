@@ -1,0 +1,56 @@
+B/S  C/S
+B/S   浏览器-服务器
+
+Tomcat服务器
+请求Request
+响应Response
+请求方式:GET,POST
+请求内容
+GET /index?method=test1 HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Cookie: Idea-8296eb31=b391cb43-cb3f-4e92-ad47-625beeeecea2
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Pragma: no-cache
+Cache-Control: no-cache
+响应内容
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+
+Socket
+XML解析
+IO流
+反射
+面向对象
+集合
+String
+
+1.分包
+utils 工具
+    XMLUtils 解析XML
+    Constant  常量
+tomcat tomcat核心组件
+    Server
+    MyRequest
+    MyResponse
+    MyHandler
+    BaseServlet
+servlet
+    HttpServlet  doget  dopost service(request,response)
+    MyServlet
+    MyServletMapping
+    MyServletContainer
+MyServlet
+    TestServlet
+
+资源在src目录下
+html
+配置文件
